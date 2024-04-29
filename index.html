@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #001338; /* Ustawienie tła na kolor oznaczony w MS Visio jako 001338 */
+            color: white; /* Biała czcionka */
+            position: relative; /* Ustawienie pozycji dla kontenera */
+        }
+
+        #countdown {
+            font-size: 70px;
+            font-weight: bold;
+            margin-top: 60px; /* Odstęp między odliczaniem a nagłówkiem */
+        }
+
+        #start {
+            text-decoration: underline; /* Podkreślenie tekstu "START EUROBET 2024" */
+        }
+
+        #logo {
+            margin-top: 20px;
+            max-width: 100%;
+            max-height: 300px;
+            width: auto;
+            height: auto;
+        }
+
+        #leftImage, #rightImage {
+            position: absolute; /* Ustawienie pozycji bezwzględnej */
+            top: calc(50% - 130px); /* Ustawienie obrazków na wysokości połowy ekranu plus margines */
+            width: 400px; /* Szerokość obrazka */
+        }
+
+        #leftImage {
+            left: 0; /* Ustawienie obrazka na lewo */
+        }
+
+        #rightImage {
+            right: 0; /* Ustawienie obrazka na prawo */
+        }
+
+        .container {
+            position: relative; /* Ustawienie pozycji dla kontenera */
+        }
+    </style>
+    <script>
+        function startCountdown() {
+            var countdownElement = document.getElementById("countdown");
+            var startElement = document.getElementById("start");
+            var endDate = new Date("2024-06-07T12:00:00");
+
+            var countdownInterval = setInterval(function() {
+                var now = new Date();
+                var timeLeft = endDate - now;
+
+                if (timeLeft < 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = "POWODZENIA ;)";
+                    startElement.textContent = "EUROBET 2024";
+
+                    // Dodanie obrazków po zakończeniu odliczania
+                    var leftImage = document.createElement("img");
+                    leftImage.src = "https://drive.google.com/thumbnail?id=1fcOBEzSUtlL9UEcQuS43UtuKE5IItvTA";
+                    leftImage.id = "leftImage";
+
+                    var rightImage = document.createElement("img");
+                    rightImage.src = "https://drive.google.com/thumbnail?id=1k9ErRBZg6D3c2TXELHx1j13W0UrnbXPx";
+                    rightImage.id = "rightImage";
+
+                    document.querySelector('.container').appendChild(leftImage);
+                    document.querySelector('.container').appendChild(rightImage);
+                } else {
+                    var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    countdownElement.textContent = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+                }
+            }, 1000);
+        }
+
+        window.onload = function() {
+            startCountdown();
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img id="logo" src="https://drive.google.com/thumbnail?id=1wp7IFHl3bLF1aFWNY9NB4SYl1NEYab8x"></img alt="Logo">
+        <h1 id="start">START EUROBET 2024</h1>
+        <p id="countdown"></p>
+    </div>
+</body>
+</html>
